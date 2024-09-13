@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Ncognto E-Commerce Site</title>
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img class="ncognto-icon" src="assets/images/Screenshot from 2024-09-13 11-43-40.png" alt="Ncognto Logo">
+                Ncognto E-Commerce Site
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="d-flex justify-content-end w-100">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center ml-3">
+                        <a href="cart.html" class="nav-link">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span id="cartCount" class="badge badge-pill badge-light">0</span>
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center ml-3">
+                        <button id="logoutButton" class="btn btn-danger d-none">Logout</button>
+                        <a class="nav-link d-none" href="login.html" id="loginLink">Login</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container mt-4">
+        <h2 class="text-center">Product Details</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="productImage" src="" class="img-fluid" alt="Product Image">
+            </div>
+            <div class="col-md-6">
+                <h3 id="productTitle"></h3>
+                <p class="lead" id="productPrice"></p>
+                <p id="productDescription"></p>
+                <a href="cart.html"> <button id="addToCartButton" class="btn btn-primary">Add to Cart</button></a>
+                <a href="product.html" class="btn btn-secondary">Back to Products</a>
+                <a href="https://ncgntco.printify.me/products" target="_blank" class="purchase-button_bouncy">Purchase Now</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer bg-dark text-white text-center py-3">
+        <p>&copy; 2024 My E-Commerce Site. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('product');
+
+        // Product database
+        const products = {
+    1: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_14_40.558Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$27.63',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    },
+    2: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_15_31.914Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$67.92',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    },
+    3: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_16_14.538Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$39.99',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    },
+    4: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_16_40.888Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$208.42',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+        
+    
+    },
+    5: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_17_14.601Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$34.82',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    },
+    6: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_22_12.517Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$87.78',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    },
+    7: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_22_44.382Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$87.78',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    },
+    8: {
+        image: 'assets/images/artbreeder-image-2024-07-30T06_23_15.165Z.jpeg',
+        title: 'Matte Canvas, Stretched, 0.75"',
+        price: '$67.92',
+        description: "Place your custom artwork, photos, or creative projects on a canvas you'll be proud to use. Each matte canvas comes with back hanging already included for convenient placement. The frame is made with profile radial pine that is ethically sourced from renewable forests. Made with highly durable cotton and polyester canvas composite (9.82 oz/yd² (333 g/m²)) with a special proprietary coating for vibrant prints that last. This canvas is an eco-friendly option as the frame is made with radiata pine responsibly sourced from renewable forests. Hang the frame with confidence as the soft rubber dots in the back corners of the frame provide ample support and a stable result. Please note: Due to the production process of the canvases, please allow for slight size deviations with a tolerance +/- 1/8\" (3.2mm)."
+    }
+};
+        const product = products[productId];
+
+        if (product) {
+            document.querySelector('#productImage').src = product.image;
+            document.querySelector('#productTitle').textContent = product.title;
+            document.querySelector('#productPrice').textContent = product.price;
+            document.querySelector('#productDescription').textContent = product.description;
+        } else {
+            document.querySelector('main').innerHTML = '<h3>Product not found</h3>';
+        }
+         
+    document.getElementById('addToCartButton').addEventListener('click', () => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    if (!cart[productId]) {
+        cart[productId] = { ...products[productId], quantity: 1 };
+    } else {
+        cart[productId].quantity += 1;
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${products[productId].title} added to cart.`);
+});
+
+
+    // Update cart count
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        document.getElementById('cartCount').textContent = cart.length;
+        console.log('Cart Count Updated:', cart.length);
+    }
+
+    updateCartCount();
+});
+    </script>
+    <script src="assets/js/auth.js" defer></script> 
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ncognto E-Commerce Site</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img class="ncognto-icon" src="assets/images/Screenshot from 2024-09-13 11-43-40.png" alt="Ncognto Logo">
+                Ncognto E-Commerce Site
+            </a>
+            <button id="logoutButton" class="btn btn-danger d-none">Logout</button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="checkout.html">Checkout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container mt-4">
+        <!-- Main content will be injected here -->
+        <div id="content"></div>
+    </main>
+
+    <footer class="footer bg-dark text-white text-center py-3">
+        <p>&copy; 2024 My E-Commerce Site. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutButton = document.getElementById('logoutButton');
+            const token = localStorage.getItem('token');
+            
+            if (token) {
+                logoutButton.classList.remove('d-none');
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('token');
+                    window.location.href = 'login.html'; // Redirect to login page after logout
+                });
+            } else {
+                logoutButton.classList.add('d-none');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Ncognto E-Commerce Site</title>
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Logo Section -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img class="ncognto-icon" src="assets/images/Screenshot from 2024-09-13 11-43-40.png" alt="Ncognto Logo" style="height: 40px; width: auto; margin-right: 10px;">
+                Ncognto E-Commerce Site
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="d-flex justify-content-end w-100">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
+                        <li class="nav-item d-flex align-items-center ml-3">
+                            <button id="logoutButton" class="btn btn-danger d-none">Logout</button>
+                            <a class="nav-link d-none" href="login.html" id="loginLink">Login</a>
+                        </li>
+                        <!-- Cart Icon Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html" aria-label="View Cart">
+                                <i class="fas fa-shopping-cart"></i> <!-- Cart icon -->
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+
+    <main role="main" class="container mt-4">
+        <h2 class="text-center">Shopping Cart</h2>
+        <div id="cartItems" class="mt-4"></div>
+        <div class="text-center">
+           <a href="checkout.html"><button id="checkout-button" class="btn btn-primary">Proceed to Checkout</button></a> 
+        </div>
+    </main>
+
+    <footer class="footer bg-dark text-white text-center py-3">
+        <p>&copy; 2024 My E-Commerce Site. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- Use full version of jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const products = {
+                1: { image: 'assets/images/artbreeder-image-2024-07-30T06_14_40.558Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$27.63' },
+                2: { image: 'assets/images/artbreeder-image-2024-07-30T06_15_31.914Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$67.92' },
+                3: { image: 'assets/images/artbreeder-image-2024-07-30T06_16_14.538Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$39.99' },
+                4: { image: 'assets/images/artbreeder-image-2024-07-30T06_16_40.888Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$208.42' },
+                5: { image: 'assets/images/artbreeder-image-2024-07-30T06_17_14.601Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$34.82' },
+                6: { image: 'assets/images/artbreeder-image-2024-07-30T06_22_12.517Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$87.78' },
+                7: { image: 'assets/images/artbreeder-image-2024-07-30T06_22_44.382Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$87.78' },
+                8: { image: 'assets/images/artbreeder-image-2024-07-30T06_23_15.165Z.jpeg', title: 'Matte Canvas, Stretched, 0.75"', price: '$67.92' }
+            };
+
+            function imageExists(url, callback) {
+                const img = new Image();
+                img.onload = () => callback(true);
+                img.onerror = () => callback(false);
+                img.src = url;
+            }
+
+            function displayCart() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                const cartItemsContainer = document.getElementById('cartItems');
+                cartItemsContainer.innerHTML = '';
+
+                if (Object.keys(cart).length === 0) {
+                    cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                    return;
+                }
+
+                // Iterate through the cart items and display each one
+                for (let productId in cart) {
+                    const item = cart[productId];
+                    if (!item) {
+                        console.error(`Missing item data for product ID: ${productId}`);
+                        continue;
+                    }
+
+                    const imageUrl = item.image || products[productId]?.image || 'assets/images/fallback.jpg';
+                    const title = item.title || products[productId]?.title || 'Unknown Product';
+                    const price = item.price || products[productId]?.price || '$0.00';
+                    const quantity = item.quantity || 1;
+
+                    // Create a new cart item element
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item mb-4';
+
+                    imageExists(imageUrl, (exists) => {
+                        itemElement.innerHTML = `
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="${exists ? imageUrl : 'assets/images/fallback.jpg'}" class="img-fluid" alt="${title}">
+                                </div>
+                                <div class="col-md-7">
+                                    <h4>${title}</h4>
+                                    <p>Price: ${price}</p>
+                                    <p>Quantity: ${quantity}</p>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button class="btn btn-danger btn-sm remove-from-cart" data-id="${productId}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(itemElement);
+
+                        // Attach the event listener to the remove button after it's added to the DOM
+                        itemElement.querySelector('.remove-from-cart').addEventListener('click', () => {
+                            removeFromCart(productId);
+                        });
+                    });
+                }
+            }
+
+            function removeFromCart(productId) {
+                console.log(`Removing product ID: ${productId}`);
+                const cart = JSON.parse(localStorage.getItem('cart')) || {};
+                if (cart[productId]) {
+                    delete cart[productId];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    displayCart(); // Refresh the cart display after removal
+                } else {
+                    console.warn(`Product ID ${productId} not found in cart.`);
+                }
+            }
+
+            // Initial call to display the cart
+            displayCart();
+        });
+    </script>
+</body>
+</html>

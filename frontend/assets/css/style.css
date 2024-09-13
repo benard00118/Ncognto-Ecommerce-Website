@@ -1,0 +1,167 @@
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+footer{
+    flex: -1;
+    position:relative;
+}
+.container{
+    color:black;
+}
+
+header {
+    background: #c4b2b2;
+    color: #fff;
+}
+main{
+    flex: -1 ;
+}
+
+.hero {
+    background: url('../images/hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 60px 0; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero h1 {
+    margin-bottom: 20px;
+}
+
+.hero .btn-primary {
+    margin-top: 30px; /* Adjust this value to control the space above the button */
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    border-radius: 5px;
+}
+
+.featured-products {
+    padding: 40px 0; /* Adjust as needed */
+}
+
+.footer {
+    background-color: #d5c6c6;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.login-form, .product-list, .checkout-form {
+    padding: 20px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.featured-products .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.featured-products .card img {
+    border-bottom: 1px solid #ddd;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+#logoutButton {
+    background-color: transparent; /* Remove the background color */
+    border: none; /* Remove any border */
+    color: #fff; /* Optional: Adjust text color if needed */
+}
+
+#logoutButton:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Optional: Add a subtle hover effect */
+}
+
+
+
+/* Styling for the button */
+a.purchase-button_bouncy {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: #4eb5f1;
+    text-align: center;
+    transition: all 0.2s;
+    animation: bouncy 3s infinite linear;
+    position: relative;
+}
+
+/* Hover effect */
+a.purchase-button_bouncy:hover {
+    background-color: #4095c6;
+}
+
+/* Media query for smaller screens */
+@media all and (max-width: 30em) {
+    a.purchase-button_bouncy {
+        display: block;
+        margin: 0.2em auto;
+    }
+}
+
+/* Bouncy animation keyframes */
+@keyframes bouncy {
+    0% { top: 0em; }
+    40% { top: 0em; }
+    43% { top: -0.9em; }
+    46% { top: 0em; }
+    48% { top: -0.4em; }
+    50% { top: 0em; }
+    100% { top: 0em; }
+}
+
+.ncognto-icon{
+    height: 60px;
+    width: auto; 
+    margin-right: 10px;
+    border-radius: 20%;
+}
